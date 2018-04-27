@@ -13,11 +13,20 @@ export let fetchBears = function() {
   };
 };
 
+export let createBear = function(bear) {
+  return (dispatch) => {
+    return axios.post(BEAR_API_URL, bear)
+      .then( (response) => {
+        dispatch(fetchBears());
+      });
+  };
+}
+
 export let deleteBear = function(id) {
   return (dispatch) => {
     return axios.delete(`${BEAR_API_URL}/${id}`)
       .then( (response) => {
         dispatch(fetchBears());
       });
-  }
+  };
 }
