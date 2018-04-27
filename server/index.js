@@ -24,6 +24,12 @@ router.route('/bears')
         res.json({ message: 'Bear created!' });
     });
 
+router.route('/bears/:id')
+    .delete(function(req, res) {
+        bears = bears.filter( (bear) => bear.id !== req.params.id );
+        res.json({ message: 'Bear deleted!' });
+    });
+
 // all of our routes will be prefixed with /api
 app.use('/api', bodyParser.json(), router);
 app.listen(8000);
