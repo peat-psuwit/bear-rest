@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+
+import reducer from './reducers';
 
 const BEAR_API_URL = 'http://localhost:8000/api/bears';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 
-let bearsReducer = function(state = [], action) {
-  if (action) {
-    if (action.type === 'FETCH_BEAR') {
-      return action.payload;
-    }
-  }
-
-  return state;
-}
-
-let store = createStoreWithMiddleware(combineReducers({
-  bears: bearsReducer
-}));
+let store = createStoreWithMiddleware(reducer);
 
 let fetchBearsActionCreator = function() {
   return (dispatch) => {
