@@ -12,3 +12,12 @@ export let fetchBears = function() {
       });
   };
 };
+
+export let deleteBear = function(id) {
+  return (dispatch) => {
+    return axios.delete(`${BEAR_API_URL}/${id}`)
+      .then( (response) => {
+        dispatch(fetchBears());
+      });
+  }
+}

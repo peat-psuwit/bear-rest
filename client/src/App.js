@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { deleteBear } from './actions';
+
 class App extends Component { 
-  renderSingleBear(bear) {
+  renderSingleBear = (bear) => {
     return (
-      <div key={bear.id}>{bear.name}</div>
+      <div key={bear.id}>
+        <button onClick={ () => this.props.deleteBear(bear.id) }>X</button>
+        {bear.name}
+      </div>
     );
   }
 
@@ -23,4 +28,8 @@ let mapStateToProps = (state) => ({
   bears: state.bears
 });
 
-export default connect(mapStateToProps)(App);
+let actionsToPropsMap = {
+  deleteBear
+};
+
+export default connect(mapStateToProps, actionsToPropsMap)(App);
